@@ -1,0 +1,29 @@
+{
+  "name": "montage-d3",
+  "version": "1.0.0",
+  "description": "montage-d3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "jshint .",
+    "start": "minit serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montagestudio/montage-d3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/montagestudio/montage-d3/issues"
+  },
+  "homepage": "https://github.com/montagestudio/montage-d3#readme",
+  "dependencies": {
+    "d3": "^4.10.2",
+    "montage": "^17.0.11"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.5",
+    "minit": "^0.5.7"
+  }
+}

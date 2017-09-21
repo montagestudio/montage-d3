@@ -1,0 +1,30 @@
+.BarChart {
+
+}
+
+.BarChart-bar {
+  fill: steelblue;
+}
+
+.BarChart-bar:hover {
+  fill: brown;
+}
+
+.BarChart-title {
+  font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.BarChart-axis {
+  font: 10px sans-serif;
+}
+
+.BarChart-axis path,
+.BarChart-axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.BarChart-axis-x path {
+  display: none;
+}
