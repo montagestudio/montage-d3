@@ -150,6 +150,8 @@ exports.BarChart = Component.specialize( /** @lends BarChart# */ {
                 width = self.options.width - margin.left - margin.right,
                 height = self.options.height - margin.top - margin.bottom;
 
+            // Based on https://bl.ocks.org/mbostock/7555321
+
             function wrap(text, width) {
                 text.each(function() {
                     var text = d3.select(this),
