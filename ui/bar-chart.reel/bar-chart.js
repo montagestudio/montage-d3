@@ -14,17 +14,21 @@ exports.BarChart = Component.specialize( /** @lends BarChart# */ {
         value: null,
     },
 
-    options: {
+    defaultOptions: {
         value: {
             height: 500,
             width: 960,
             margin: {
-                top: 80,
-                right: 180,
-                bottom: 80,
-                left: 180
+                top: 10,
+                right: 0,
+                bottom: 30,
+                left: 50
             }
         }
+    },
+
+    options: {
+        value: null
     },
 
     axis: {
@@ -47,9 +51,41 @@ exports.BarChart = Component.specialize( /** @lends BarChart# */ {
         }
     },
 
+    margin: {
+        get: function () {
+            var self = this,
+                margin = self.options.margin || self.defaultOptions.margin;
+            return {
+                top: margin.bottom || 0,
+                bottom: margin.bottom || 0,
+                left: margin.left || 0,
+                right: margin.right || 0
+            };
+        }
+    },
+
+    width: {
+        get: function () {
+            var self = this,
+                margin = self.margin,
+                width = self.options.width || self.defaultOptions.width;
+            return (width - (margin.left || 0) - (margin.right || 0));
+        }
+    },
+
+    height: {
+        get: function () {
+            var self = this,
+                margin = self.margin,
+                height = self.options.height || self.defaultOptions.height;
+            return (height - (margin.top || 0) - (margin.bottom || 0));
+        }
+    },
+
     constructor: {
         value: function BarChart() {
             this.super();
+            this.options = this.options || this.defaultOptions;
         }
     },
 
@@ -104,9 +140,8 @@ exports.BarChart = Component.specialize( /** @lends BarChart# */ {
                 axis = this.axis,
                 data = this.data,
                 view = self.view,
-                margin = self.options.margin,
-                width = self.options.width - margin.left - margin.right,
-                height = self.options.height - margin.top - margin.bottom;
+                width = self.width,
+                height = self.height;
 
             // Get series selection and map data
             series = view.selectAll(".BarChart-bar")
@@ -131,6 +166,9 @@ exports.BarChart = Component.specialize( /** @lends BarChart# */ {
                 .attr("y", function(d) {
                     return scales.y(d.value);
                 })
+                .attr("fill", function(d) {
+                    return d.color || 'steelblue';
+                })
                 .attr("height", function(d) {
                     return height - scales.y(d.value);
                 });
@@ -146,9 +184,8 @@ exports.BarChart = Component.specialize( /** @lends BarChart# */ {
                 scales = this.scales,
                 axis = this.axis,
                 view = self.view,
-                margin = self.options.margin,
-                width = self.options.width - margin.left - margin.right,
-                height = self.options.height - margin.top - margin.bottom;
+                width = self.width,
+                height = self.height;
 
             // Based on https://bl.ocks.org/mbostock/7555321
 
@@ -203,9 +240,9 @@ exports.BarChart = Component.specialize( /** @lends BarChart# */ {
                 scales = this.scales,
                 svg = self.svg,
                 view = self.view,
-                margin = self.options.margin,
-                width = self.options.width - margin.left - margin.right,
-                height = self.options.height - margin.top - margin.bottom;
+                margin = self.margin,
+                width = self.width,
+                height = self.height;
 
             svg.attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom);
@@ -226,7 +263,7 @@ exports.BarChart = Component.specialize( /** @lends BarChart# */ {
 
             // Update Axis
             self.axis.x.orient("bottom");
-            self.axis.y.orient("left").ticks(8, "%");
+            self.axis.y.orient("left").ticks(8, "$");
         }
     }
 });
