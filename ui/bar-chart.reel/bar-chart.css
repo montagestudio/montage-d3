@@ -1,7 +1,7 @@
 .BarChart {
 
 }
-
+/*
 .BarChart-bar {
   fill: steelblue;
 }
@@ -9,6 +9,7 @@
 .BarChart-bar:hover {
   fill: brown;
 }
+*/
 
 .BarChart-title {
   font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
