@@ -21,7 +21,7 @@ exports.BarChart = Component.specialize( /** @lends BarChart# */ {
             margin: {
                 top: 10,
                 right: 0,
-                bottom: 30,
+                bottom: 25,
                 left: 50
             }
         }
@@ -51,15 +51,23 @@ exports.BarChart = Component.specialize( /** @lends BarChart# */ {
         }
     },
 
+    handleDataChange: {
+        value: function () {
+
+            this.needsDraw = true;
+        }
+    },
+
     margin: {
         get: function () {
             var self = this,
-                margin = self.options.margin || self.defaultOptions.margin;
+                defaultMargin = self.defaultOptions.margin,
+                margin = self.options.margin || defaultMargin;
             return {
-                top: margin.bottom || 0,
-                bottom: margin.bottom || 0,
-                left: margin.left || 0,
-                right: margin.right || 0
+                top: margin.top !== void 0 ? margin.top :  defaultMargin.top,
+                bottom: margin.bottom !== void 0 ? margin.bottom :  defaultMargin.bottom,
+                left: margin.left !== void 0 ? margin.left :  defaultMargin.left,
+                right: margin.right !== void 0 ? margin.right :  defaultMargin.right,
             };
         }
     },
